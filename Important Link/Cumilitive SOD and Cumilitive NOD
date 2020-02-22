@@ -1,1 +1,63 @@
 http://rizoantoufiq.blogspot.com/2015/12/lightoj-1098-new-function.html
+
+
+Given Number P = 25, i = 2 , j= P/i = 12
+From above calculation, we can find out two relations
+First Relation
+2+3+4+5+6+7+8+9+10+11+12
+= 1+2+3+4+5+6+7+8+9+10+11+12-1 
+= j*(j+1)/2 - (i-1)*(i-1+1)/2  
+= j*(j+1)/2 - (i-1)*(i)/2
+= (j^2+j - i^2 + i)/2
+= ((j-i)(j+i)+(j+i))/2
+= ((j+i)(j-i+1))/2  (General Form)
+= (14 * 11 )/2 = 77
+
+Second Relation
+2x10 = i*(j-i)  (General Form)
+     = 20
+
+Again
+ i  = 3 ,  j = P/i = 8
+
+First Relation
+3+4+5+6+7+8
+= (1+2+3+4+5+6+7+8) - (1+2)
+= (j*(j+1)/2 - (i-1)*(i-1+1)/2
+= ((j+i)(j-i+1))/2  (General Form)
+= (11 * 6 )/2 = 33
+
+Second Relation
+3x5 = i*(j-i)
+    = 15
+
+Again
+ i  = 4 ,  j = P/i = 6
+
+First Relation
+4+5+6
+= (1+2+3+4+5+6) - (1+2+3)
+= (j*(j+1)/2 - (i-1)*(i-1+1)/2
+= ((j+i)(j-i+1))/2  (General Form)
+= (10 * 3 )/2 = 15
+
+Second Relation
+4x2 = i*(j-i)
+    = 8
+
+Again
+ i  = 5 ,  j = P/i = 5
+
+First Relation
+5
+= (1+2+3+4+5) - (1+2+3+4)
+= (j*(j+1)/2 - (i-1)*(i-1+1)/2
+= ((j+i)(j-i+1))/2  (General Form)
+= (10 * 1 )/2 = 5
+
+Second Relation
+5x0 = i*(j-i)
+    = 0
+
+SUM = 77+20+33+15+15+8+5+0 = 173
+
