@@ -1,0 +1,75 @@
+ #include<bits/stdc++.h>
+    #define ll long long
+    #define MAXN 100005
+    #define SQMAX 350
+     
+    using namespace std;
+     
+    struct qry{
+        int L,R,id;
+    };
+     
+    int n,m;
+    int arr[MAXN],ans[MAXN];
+    vector<qry>blocks[SQMAX];
+    int blckSize,blckCnt;
+    unordered_map<int,int>frq;
+    int yes=0;
+     
+    bool compare(qry q1,qry q2){
+        if(q1.R==q2.R) return q1.L<q2.L;
+        else return q1.R<q2.R;
+    }
+     
+    void add(int x){
+        frq[x]++;
+        if(frq[x]==1) yes++;
+    }
+    void remove(int x){
+        frq[x]--;
+        if(frq[x]==0) yes--;
+    }
+     
+    int main()
+    {
+        int t,cas=0;
+        scanf("%d",&t);
+        while(t--){
+        	printf("Case %d:\n",++cas);
+        	for(int i=0;i<SQMAX;i++)
+        		blocks[i].clear();
+        	frq.clear();
+        	yes=0;
+	        scanf("%d%d",&n,&m);
+	     
+	        for(int i=0;i<n;i++){
+	            scanf("%d",&arr[i]);
+	        }
+	        blckSize=sqrt(n);
+	        blckCnt=n/blckSize;
+	     
+	        for(int i=0;i<m;i++){
+	            int l,r;
+	            scanf("%d%d",&l,&r);
+	            l--,r--;
+	            blocks[l/blckSize].push_back({l,r,i});
+	        }
+	        int l=0,r=-1;
+	        for(int i=0;i<blckCnt;i++){
+	            if(blocks[i].size()==0) continue;
+	            sort(blocks[i].begin(),blocks[i].end(),compare);
+	     
+	            for(int j=0;j<blocks[i].size();j++){
+	                qry q=blocks[i][j];
+	                while(l<q.L) remove(arr[l]),l++;
+	                while(l>q.L) --l,add(arr[l]);
+	                while(r<q.R) ++r,add(arr[r]);
+	                while(r>q.R) remove(arr[r]),r--;
+	                ans[q.id]=yes;
+	            }
+	        }
+	        for(int i=0;i<m;i++){
+	            printf("%d\n",ans[i]);
+	        }
+        }
+    }
