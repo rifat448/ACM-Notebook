@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define mod 1000000007
+
+
+using namespace std;
+
+void Multiplication(ll mat1[2][2], ll mat2[2][2]){
+    ll w = (mat1[0][0] * mat2[0][0])%mod + (mat1[0][1] * mat2[1][0])%mod;
+    ll x = (mat1[0][0] * mat2[0][1])%mod + (mat1[0][1] * mat2[1][1])%mod;
+    ll y = (mat1[1][0] * mat2[0][0])%mod + (mat1[1][1] * mat2[1][0])%mod;
+    ll z = (mat1[1][0] * mat2[0][1])%mod + (mat1[1][1] * mat2[1][1])%mod;
+
+    mat1[0][0] = w%mod+mod;
+    mat1[0][1] = x%mod+mod;
+    mat1[1][0] = y%mod+mod;
+    mat1[1][1] = z%mod+mod;
+}
+
+void Bigmod(ll mat[2][2],ll n){
+    if(n==0 || n==1) return ;
+    ll mat2[2][2]={{1,1},{1,0}};
+    Bigmod(mat,n/2);
+    Multiplication(mat,mat);
+    if(n%2){
+        Multiplication(mat,mat2);
+    }
+}
+
+ll Fib(ll n){
+    ll mat[2][2]={{1,1},{1,0}};
+    Bigmod(mat,n);
+    return mat[0][0]%mod;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(), cout.tie(0);
+
+    int t; cin>>t;
+    while(t--){
+        ll n; cin>>n;
+        cout<<Fib(n+1)<<endl;
+    }
+}
